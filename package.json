@@ -1,0 +1,21 @@
+{
+  "name": "whitelist-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/bot.ts",
+    "start": "node dist/bot.js",
+    "build": "tsup src/bot.ts --minify"
+  },
+  "author": "TwoBrake",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.4.1",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "prisma": "^5.4.1"
+  }
+}
