@@ -18,14 +18,23 @@ export async function execute(interaction: CommandInteraction) {
         {
           name: "Deploy",
           value: "Deploys slash commands to the development server.",
+        },
+        {
+          name: "Whitelist",
+          value: "Whitelists a user.",
+        },
+        {
+          name: "Unwhitelist",
+          value: "Unwhitelists a user.",
         }
-      );
-    return interaction.reply({embeds: [embed]});
+      )
+      .setColor("Grey");
+    return interaction.reply({ embeds: [embed] });
   } catch (error) {
     console.error(error);
     const errorEmbed = new EmbedBuilder()
       .setTitle("Something went wrong.")
       .setColor("Red");
-    return interaction.reply({embeds: [errorEmbed]});
+    return interaction.reply({ embeds: [errorEmbed] });
   }
 }
