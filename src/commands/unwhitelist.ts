@@ -5,6 +5,7 @@ import {
 } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import { hasPerms, isBotOwner } from "@functions/memberCheck";
+import print from "@functions/print";
 const prisma = new PrismaClient();
 
 export const data = new SlashCommandBuilder()
@@ -59,7 +60,7 @@ export async function execute(interaction: CommandInteraction) {
       return interaction.reply({ embeds: [errorEmbed] });
     }
   } catch (err) {
-    console.log(err);
+    print("error", err);
     const errorEmbed = new EmbedBuilder()
       .setTitle("Something went wrong.")
       .setColor("Red");

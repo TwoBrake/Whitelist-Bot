@@ -2,13 +2,14 @@ import { Client } from "discord.js";
 import { config } from "@src/config";
 import { commands } from "./commands";
 import { deployCommands } from "@src/deploy-commands";
+import print from "@functions/print";
 
 const client = new Client({
   intents: ["Guilds", "GuildMessages", "DirectMessages"],
 });
 
 client.once("ready", () => {
-  console.log("Whitelist bot successfully started.");
+  print("success", "Whitelist bot successfully started");
 });
 
 client.on("guildCreate", async (guild) => {

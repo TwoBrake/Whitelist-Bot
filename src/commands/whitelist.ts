@@ -6,6 +6,7 @@ import {
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { hasPerms, isBotOwner } from "@functions/memberCheck";
+import print from "@functions/print";
 
 export const data = new SlashCommandBuilder()
   .setName("whitelist")
@@ -32,14 +33,14 @@ export async function execute(interaction: CommandInteraction) {
         });
         //* Check if the user exists in the database.
         if (!databaseUser) {
-          console.log(parseInt(user.id));
+          print("info", `Whitelisting user ID: ${user.id}`);
           await prisma.user.create({
             data: {
               id: parseInt(user.id),
               key: generateKey(20),
             },
           });
-          console.log("created user");
+          print("success", `Whitelisted ${user.tag}`);
           const successEmbed = new EmbedBuilder()
             .setTitle("User whitelisted.")
             .setColor("Green");
