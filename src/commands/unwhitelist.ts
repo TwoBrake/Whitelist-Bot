@@ -38,7 +38,10 @@ export async function execute(interaction: CommandInteraction) {
             },
           });
           const successEmbed = new EmbedBuilder()
-            .setTitle("User unwhitelisted.")
+            .setTitle("Success")
+            .setDescription(
+              `${user} has been unwhitelisted successfully! They have now been removed from our database.`
+            )
             .setColor("Green");
           return interaction.reply({ embeds: [successEmbed] });
         } else {

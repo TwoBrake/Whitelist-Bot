@@ -42,7 +42,10 @@ export async function execute(interaction: CommandInteraction) {
           });
           print("success", `Whitelisted ${user.tag}`);
           const successEmbed = new EmbedBuilder()
-            .setTitle("User whitelisted.")
+            .setTitle("Success")
+            .setDescription(
+              `${user} has been whitelisted successfully! They can now be found in our database.`
+            )
             .setColor("Green");
           return interaction.reply({ embeds: [successEmbed] });
         } else {

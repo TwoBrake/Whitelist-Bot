@@ -3,6 +3,7 @@ import * as deploy from "@commands/deploy";
 import * as whitelist from "@commands/whitelist";
 import * as unwhitelist from "@commands/unwhitelist";
 import * as key from "@commands/key";
+import * as check from "@commands/check";
 
 export const commands = {
   help,
@@ -10,4 +11,5 @@ export const commands = {
   whitelist,
   unwhitelist,
   key,
+  check,
 };
