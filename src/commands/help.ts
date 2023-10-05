@@ -14,17 +14,17 @@ export async function execute(interaction: CommandInteraction) {
       .setTitle("Help")
       .setDescription("This is the help message.")
       .addFields(
-        { name: "Help", value: "Returns the help message." },
+        { name: "</help:1159265951691309197>", value: "Returns the help message." },
         {
-          name: "Deploy",
+          name: "</deploy:1159265951691309198>",
           value: "Deploys slash commands to the development server.",
         },
         {
-          name: "Whitelist",
+          name: "</whitelist:1159270661722755143>",
           value: "Whitelists a user.",
         },
         {
-          name: "Unwhitelist",
+          name: "</unwhitelist:1159278006813073490>",
           value: "Unwhitelists a user.",
         }
       )
