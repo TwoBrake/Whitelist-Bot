@@ -2,11 +2,9 @@ import {
   CommandInteraction,
   SlashCommandBuilder,
   EmbedBuilder,
-  GuildMemberRoleManager,
 } from "discord.js";
 import { PrismaClient } from "@prisma/client";
-import config from "../../botConfig.json";
-import { hasPerms, isBotOwner } from "../functions/memberCheck";
+import { hasPerms, isBotOwner } from "@functions/memberCheck";
 const prisma = new PrismaClient();
 
 export const data = new SlashCommandBuilder()

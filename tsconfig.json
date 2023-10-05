@@ -10,6 +10,12 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictNullChecks": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "src",
+    "paths": {
+      "@functions/*": ["functions/*"],
+      "@commands/*": ["commands/*"],
+      "@src/*": ["*"],
+    }
   }
 }

@@ -2,12 +2,10 @@ import {
   CommandInteraction,
   SlashCommandBuilder,
   EmbedBuilder,
-  GuildMemberRoleManager,
 } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import config from "../../botConfig.json";
-import { hasPerms, isBotOwner } from "../functions/memberCheck";
+import { hasPerms, isBotOwner } from "@functions/memberCheck";
 
 export const data = new SlashCommandBuilder()
   .setName("whitelist")
@@ -69,8 +67,9 @@ export async function execute(interaction: CommandInteraction) {
 }
 
 function generateKey(length: number) {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const charactersLength = characters.length;
   let counter = 0;
   while (counter < length) {
