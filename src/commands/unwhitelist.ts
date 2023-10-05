@@ -6,7 +6,7 @@ import {
 } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import config from "../../botConfig.json";
-import roleCheck from "../roleCheck";
+import { hasPerms, isBotOwner } from "../memberCheck";
 const prisma = new PrismaClient();
 
 export const data = new SlashCommandBuilder()
@@ -25,7 +25,7 @@ export async function execute(interaction: CommandInteraction) {
     //* Check if both users exists.
     if (user && interaction.member) {
       //* Check if the member running the command has the correct role.
-      if (await roleCheck(interaction)) {
+      if (await hasPerms(interaction)) {
         const databaseUser = await prisma.user.findUnique({
           where: {
             id: parseInt(user.id),

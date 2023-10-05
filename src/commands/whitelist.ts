@@ -7,7 +7,7 @@ import {
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import config from "../../botConfig.json";
-import roleCheck from "../roleCheck";
+import { hasPerms, isBotOwner } from "../memberCheck";
 
 export const data = new SlashCommandBuilder()
   .setName("whitelist")
@@ -25,7 +25,7 @@ export async function execute(interaction: CommandInteraction) {
     //* Check if both users exists.
     if (user && interaction.member) {
       //* Check if the member running the command has the correct role.
-      if (await roleCheck(interaction)) {
+      if (await hasPerms(interaction)) {
         //* Define the database user variable for later use.
         const databaseUser = await prisma.user.findUnique({
           where: {
