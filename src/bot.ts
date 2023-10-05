@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 client.once("ready", () => {
-  console.log("Discord bot is ready!");
+  console.log("Whitelist bot successfully started.");
 });
 
 client.on("guildCreate", async (guild) => {
