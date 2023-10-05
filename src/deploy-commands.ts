@@ -19,6 +19,11 @@ export async function deployCommands({ guildId }: DeployCommandsProps) {
       body: commandsData,
     });
 
+    for (const command of commandsData) {
+      const commandName = command.name;
+      print("info", `Deploying command /${commandName}.`);
+    }
+
     print("success", "Successfully reloaded application (/) commands.");
   } catch (err) {
     print("error", err);

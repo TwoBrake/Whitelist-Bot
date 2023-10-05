@@ -24,6 +24,10 @@ client.on("interactionCreate", async (interaction) => {
   if (commands[commandName as keyof typeof commands]) {
     commands[commandName as keyof typeof commands].execute(interaction);
   }
+  print(
+    "success",
+    `Command /${commandName} executed by ${interaction.user.tag}.`
+  );
 });
 
 client.login(config.BOT_TOKEN);
