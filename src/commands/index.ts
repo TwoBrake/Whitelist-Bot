@@ -1,9 +1,9 @@
-import * as help from "@commands/help";
-import * as deploy from "@commands/deploy";
-import * as whitelist from "@commands/whitelist";
-import * as unwhitelist from "@commands/unwhitelist";
-import * as key from "@commands/key";
-import * as check from "@commands/check";
+import * as help from "@commands/util/help";
+import * as deploy from "@commands/util/deploy";
+import * as whitelist from "@commands/whitelist/whitelist";
+import * as unwhitelist from "@commands/whitelist/unwhitelist";
+import * as key from "@commands/whitelist/key";
+import * as check from "@commands/whitelist/check";
 
 export const commands = {
   help,

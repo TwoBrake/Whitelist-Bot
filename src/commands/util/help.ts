@@ -1,7 +1,9 @@
+import config from "../../../botConfig.json";
 import {
   CommandInteraction,
   SlashCommandBuilder,
   EmbedBuilder,
+  ColorResolvable,
 } from "discord.js";
 
 export const data = new SlashCommandBuilder()
@@ -12,9 +14,12 @@ export async function execute(interaction: CommandInteraction) {
   try {
     const embed = new EmbedBuilder()
       .setTitle("Help")
-      .setDescription("This is the help message.")
+      .setDescription("Here is a list of the commands you can use:")
       .addFields(
-        { name: "</help:1159265951691309197>", value: "Returns the help message." },
+        {
+          name: "</help:1159265951691309197>",
+          value: "Returns the help message.",
+        },
         {
           name: "</deploy:1159265951691309198>",
           value: "Deploys slash commands to the development server.",
@@ -26,9 +31,17 @@ export async function execute(interaction: CommandInteraction) {
         {
           name: "</unwhitelist:1159278006813073490>",
           value: "Unwhitelists a user.",
+        },
+        {
+          name: "</key:1159306411969355958>",
+          value: "Returns your key.",
+        },
+        {
+          name: "</check:1159621176717475870>",
+          value: "Checks if a user is whitelisted or not.",
         }
       )
-      .setColor("Grey");
+      .setColor(config.themeColor as ColorResolvable);
     return interaction.reply({ embeds: [embed] });
   } catch (error) {
     console.error(error);
