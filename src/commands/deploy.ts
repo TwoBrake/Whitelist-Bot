@@ -4,7 +4,7 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import { deployCommands } from "../deploy-commands";
-import { isBotOwner } from "../memberCheck";
+import { isBotOwner } from "../functions/memberCheck";
 
 export const data = new SlashCommandBuilder()
   .setName("deploy")

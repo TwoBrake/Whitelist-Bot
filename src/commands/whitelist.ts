@@ -7,7 +7,7 @@ import {
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import config from "../../botConfig.json";
-import { hasPerms, isBotOwner } from "../memberCheck";
+import { hasPerms, isBotOwner } from "../functions/memberCheck";
 
 export const data = new SlashCommandBuilder()
   .setName("whitelist")

@@ -1,5 +1,5 @@
 import { CommandInteraction, GuildMemberRoleManager } from "discord.js";
-import config from "../botConfig.json";
+import config from "../../botConfig.json";
 
 export async function isBotOwner(interaction: CommandInteraction) {
   if (interaction.user.id === "705529912374591930") {

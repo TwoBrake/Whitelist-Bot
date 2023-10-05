@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import { config } from "./config";
+import { config } from "../src/config";
 import { commands } from "./commands";
 import { deployCommands } from "./deploy-commands";
 
