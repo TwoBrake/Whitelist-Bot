@@ -7,6 +7,7 @@ import {
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import config from "../../botConfig.json";
+import roleCheck from "../roleCheck";
 
 export const data = new SlashCommandBuilder()
   .setName("whitelist")
@@ -23,10 +24,8 @@ export async function execute(interaction: CommandInteraction) {
     const user = interaction.options.getUser("user");
     //* Check if both users exists.
     if (user && interaction.member) {
-      let runnerRole = (interaction.member.roles as GuildMemberRoleManager)
-        .cache;
       //* Check if the member running the command has the correct role.
-      if (runnerRole.some((role) => config.whitelistRoles.includes(role.id))) {
+      if (await roleCheck(interaction)) {
         //* Define the database user variable for later use.
         const databaseUser = await prisma.user.findUnique({
           where: {

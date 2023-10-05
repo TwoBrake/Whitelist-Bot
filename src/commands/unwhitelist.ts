@@ -6,6 +6,7 @@ import {
 } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import config from "../../botConfig.json";
+import roleCheck from "../roleCheck";
 const prisma = new PrismaClient();
 
 export const data = new SlashCommandBuilder()
@@ -23,10 +24,8 @@ export async function execute(interaction: CommandInteraction) {
     const user = interaction.options.getUser("user");
     //* Check if both users exists.
     if (user && interaction.member) {
-      let runnerRole = (interaction.member.roles as GuildMemberRoleManager)
-        .cache;
       //* Check if the member running the command has the correct role.
-      if (runnerRole.some((role) => config.whitelistRoles.includes(role.id))) {
+      if (await roleCheck(interaction)) {
         const databaseUser = await prisma.user.findUnique({
           where: {
             id: parseInt(user.id),
