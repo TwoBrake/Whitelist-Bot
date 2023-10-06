@@ -1,10 +1,7 @@
-import {
-  CommandInteraction,
-  SlashCommandBuilder,
-  EmbedBuilder,
-} from "discord.js";
+import { CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { PrismaClient } from "@prisma/client";
-import { hasPerms, isBotOwner } from "@functions/memberCheck";
+import { hasPerms } from "@functions/memberCheck";
+import { successEmbed, errorEmbed } from "@functions/embed";
 import print from "@functions/print";
 const prisma = new PrismaClient();
 
@@ -37,36 +34,40 @@ export async function execute(interaction: CommandInteraction) {
               id: parseInt(user.id),
             },
           });
-          const successEmbed = new EmbedBuilder()
-            .setTitle("Success")
-            .setDescription(
-              `${user} has been unwhitelisted successfully! They have now been removed from our database.`
-            )
-            .setColor("Green");
-          return interaction.reply({ embeds: [successEmbed] });
+          return interaction.reply({
+            embeds: [
+              await successEmbed(
+                "Success",
+                `${user} has been unwhitelisted successfully! They have now been removed from our database.`
+              ),
+            ],
+          });
         } else {
-          const errorEmbed = new EmbedBuilder()
-            .setTitle("User doesn't exist.")
-            .setColor("Red");
-          return interaction.reply({ embeds: [errorEmbed] });
+          return interaction.reply({
+            embeds: [
+              await errorEmbed(
+                "Something went wrong!",
+                `We couldn't find ${user} in our database.`
+              ),
+            ],
+          });
         }
       } else {
-        const errorEmbed = new EmbedBuilder()
-          .setTitle("You don't have permission to run this command.")
-          .setColor("Red");
-        return interaction.reply({ embeds: [errorEmbed] });
+        return interaction.reply({
+          embeds: [
+            await errorEmbed("You don't have permission to run this command."),
+          ],
+        });
       }
     } else {
-      const errorEmbed = new EmbedBuilder()
-        .setTitle("Something went wrong.")
-        .setColor("Red");
-      return interaction.reply({ embeds: [errorEmbed] });
+      return interaction.reply({
+        embeds: [await errorEmbed("Something went wrong!")],
+      });
     }
   } catch (err) {
     print("error", err);
-    const errorEmbed = new EmbedBuilder()
-      .setTitle("Something went wrong.")
-      .setColor("Red");
-    return interaction.reply({ embeds: [errorEmbed] });
+    return interaction.reply({
+      embeds: [await errorEmbed("Something went wrong!")],
+    });
   }
 }

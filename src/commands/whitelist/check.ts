@@ -1,13 +1,7 @@
-import {
-  CommandInteraction,
-  SlashCommandBuilder,
-  EmbedBuilder,
-  codeBlock,
-} from "discord.js";
+import { CommandInteraction, SlashCommandBuilder, codeBlock } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { hasPerms, isBotOwner } from "@functions/memberCheck";
-import print from "@functions/print";
+import { hasPerms } from "@functions/memberCheck";
 import { successEmbed, errorEmbed } from "@functions/embed";
 
 export const data = new SlashCommandBuilder()

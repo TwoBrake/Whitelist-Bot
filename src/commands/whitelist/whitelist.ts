@@ -1,11 +1,8 @@
-import {
-  CommandInteraction,
-  SlashCommandBuilder,
-  EmbedBuilder,
-} from "discord.js";
+import { CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { hasPerms, isBotOwner } from "@functions/memberCheck";
+import { hasPerms } from "@functions/memberCheck";
+import { successEmbed, errorEmbed } from "@functions/embed";
 import print from "@functions/print";
 
 export const data = new SlashCommandBuilder()
@@ -41,32 +38,37 @@ export async function execute(interaction: CommandInteraction) {
             },
           });
           print("success", `Whitelisted ${user.tag}`);
-          const successEmbed = new EmbedBuilder()
-            .setTitle("Success")
-            .setDescription(
-              `${user} has been whitelisted successfully! They can now be found in our database.`
-            )
-            .setColor("Green");
-          return interaction.reply({ embeds: [successEmbed] });
+          return interaction.reply({
+            embeds: [
+              await successEmbed(
+                "Success",
+                `${user} has been whitelisted successfully! They can now be found in our database.`
+              ),
+            ],
+          });
         } else {
-          const errorEmbed = new EmbedBuilder()
-            .setTitle("User already exists.")
-            .setColor("Red");
-          return interaction.reply({ embeds: [errorEmbed] });
+          return interaction.reply({
+            embeds: [
+              await errorEmbed(
+                "Something went wrong!",
+                `${user} already exists in our database.`
+              ),
+            ],
+          });
         }
       } else {
-        const errorEmbed = new EmbedBuilder()
-          .setTitle("You don't have permission to run this command.")
-          .setColor("Red");
-        return interaction.reply({ embeds: [errorEmbed] });
+        return interaction.reply({
+          embeds: [
+            await errorEmbed("You don't have permission to run this command."),
+          ],
+        });
       }
     }
   } catch (err) {
     console.error(err);
-    const errorEmbed = new EmbedBuilder()
-      .setTitle("Something went wrong.")
-      .setColor("Red");
-    return interaction.reply({ embeds: [errorEmbed] });
+    return interaction.reply({
+      embeds: [await errorEmbed("Something went wrong!")],
+    });
   }
 }
 

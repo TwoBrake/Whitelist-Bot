@@ -1,11 +1,7 @@
-import {
-  CommandInteraction,
-  SlashCommandBuilder,
-  EmbedBuilder,
-  codeBlock,
-} from "discord.js";
+import { CommandInteraction, SlashCommandBuilder, codeBlock } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import { successEmbed, errorEmbed } from "@functions/embed";
 
 export const data = new SlashCommandBuilder()
   .setName("key")
@@ -20,25 +16,26 @@ export async function execute(interaction: CommandInteraction) {
     });
     //* Check if the user exists in the database.
     if (databaseUser) {
-      const keyEmbed = new EmbedBuilder()
-        .setTitle("Success")
-        .setDescription(
-          `We successfully found your key in our database. Here is your key:\n${codeBlock(
-            databaseUser.key
-          )}`
-        )
-        .setColor("Green");
-      return interaction.reply({ embeds: [keyEmbed], ephemeral: true });
+      return interaction.reply({
+        embeds: [
+          await successEmbed(
+            "Success",
+            `We successfully found your key in our database. Here is your key:\n${codeBlock(
+              databaseUser.key
+            )}`
+          ),
+        ],
+        ephemeral: true,
+      });
     } else {
-      const errorEmbed = new EmbedBuilder()
-        .setTitle("You are not whitelisted.")
-        .setColor("Red");
-      return interaction.reply({ embeds: [errorEmbed] });
+      return interaction.reply({
+        embeds: [await errorEmbed("You are not whitelisted.")],
+        ephemeral: true,
+      });
     }
   } catch {
-    const errorEmbed = new EmbedBuilder()
-      .setTitle("Something went wrong.")
-      .setColor("Red");
-    return interaction.reply({ embeds: [errorEmbed] });
+    return interaction.reply({
+      embeds: [await errorEmbed("Something went wrong!")],
+    });
   }
 }

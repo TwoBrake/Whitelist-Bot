@@ -9,7 +9,7 @@ const client = new Client({
 });
 
 client.once("ready", () => {
-  print("success", "Whitelist bot successfully started");
+  print("success", "Whitelist bot successfully started.");
 });
 
 client.on("guildCreate", async (guild) => {
