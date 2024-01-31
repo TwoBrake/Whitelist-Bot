@@ -11,5 +11,6 @@ BOT_TOKEN=
 CLIENT_ID=
 DATABASE_URL=
 ```
-5. Run `npm run build` to build the project.
-6. Run `npm run start` to start the bot.
+5. Run `npx prisma db push` to push the database schema to your database.
+6. Run `npm run build` to build the project.
+7. Run `npm run start` to start the bot.
